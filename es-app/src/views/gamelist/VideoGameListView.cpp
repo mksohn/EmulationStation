@@ -11,6 +11,9 @@
 #include "Settings.h"
 #endif
 
+// smk change : add for RFID
+#include <fstream>
+
 VideoGameListView::VideoGameListView(Window* window, FileData* root) :
 	BasicGameListView(window, root),
 	mDescContainer(window), mDescription(window),
@@ -286,6 +289,11 @@ void VideoGameListView::updateInfoPanel()
 		}
 
 		fadingOut = false;
+		
+		// smk change : add for RFID
+		std::ofstream out("/tmp/PieMarquee.log");
+		out << "Game: " << file->getPath();
+		out.close();
 	}
 
 	std::vector<GuiComponent*> comps = getMDValues();
